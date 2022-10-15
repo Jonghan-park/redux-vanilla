@@ -9,13 +9,14 @@ const reducer = (state = 0, action) => {
     return state + 1;
   } else if (action.type === "MINUS") {
     return state - 1;
+  } else {
+    return state;
   }
-  return state;
 };
 const store = createStore(reducer);
-store.dispatch({ type: "ADD" });
-console.log(store.getState());
-store.dispatch({ type: "ADD" });
-console.log(store.getState());
-store.dispatch({ type: "MINUS" });
-console.log(store.getState());
+const onChange = () => {
+  number.innerText = store.getState();
+};
+store.subscribe(onChange);
+add.addEventListener("click", () => store.dispatch({ type: "ADD" }));
+minus.addEventListener("click", () => store.dispatch({ type: "MINUS" }));
